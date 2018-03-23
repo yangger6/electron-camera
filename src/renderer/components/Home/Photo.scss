@@ -1,0 +1,5 @@
+header.photo {
+}
+.photo + main {
+  height: calc(100vh - 124px - 44px);
+}

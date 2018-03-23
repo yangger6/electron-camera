@@ -1,0 +1,32 @@
+$item-width: 100vw / 6;
+.mode{
+  display: flex;
+  overflow: hidden;
+  *{display: flex}
+  .masked{
+    width: $item-width;
+    height: 30px;
+    position: relative;
+    margin: 0 auto;
+  }
+  ul{
+    flex-wrap: wrap;
+    height: inherit;
+    width: 100vw;
+    justify-content: space-between;
+    align-content: flex-end;
+    position: absolute;
+    li{
+      width: $item-width;
+      justify-content: center;
+      align-items: center;
+      &.selected span{
+        color: #e3bd3f
+      }
+      span {
+        font-size: 12px;
+        color: #ffffff;
+      }
+    }
+  }
+}
