@@ -5,11 +5,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Photo',
-    //   component: require('@/components/Photo/Photo').default
-    // },
+    {
+      path: '/',
+      name: 'Home',
+      component: require('@/components/Home/Home').default
+    }
     // {
     //   path: '*',
     //   redirect: '/'

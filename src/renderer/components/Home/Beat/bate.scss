@@ -2,7 +2,9 @@
   width: 70px;
   height: 70px;
   border-radius: 35px;
-  background: white;
+  background: transparent;
+  border: 5px solid #fff;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,5 +15,36 @@
     box-sizing: border-box;
     border-radius: 35px;
     background: white;
+    transition: all .1s ease-in-out;
+    &.photo:active{
+      border: 5px solid #000;
+    }
+    &.square:active{
+      border: 5px solid #000;
+    }
+    &.pano:active{
+      border: 5px solid #000;
+    }
+    &.video{
+      background: red;
+    }
+    &.sloMo{
+      background: red;
+    }
+    &.timeLapse{
+      background: red;
+    }
+    &.video:active{
+      width: 54px;
+      height: 54px;
+    }
+    &.sloMo:active{
+      width: 54px;
+      height: 54px;
+    }
+    &.timeLapse:active{
+      width: 54px;
+      height: 54px;
+    }
   }
 }
