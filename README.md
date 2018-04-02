@@ -1,7 +1,21 @@
-# camera
-
+# electron-camera
+ A Desktop program similar to IOS Camera. Build [electron-vue](https://github.com/SimulatedGREG/electron-vue)
 > 0.0.1
 
+#### Features
+    ~~Live video push steaming~~
+    
+#### Todos
+    [] live photo
+    [] HDR
+    [] flashlight
+    [] continuous shooting
+    [] pano
+    [] burst
+    [] time-lapse
+    [] slo-mo
+    [] video
+    [] filter
 #### Build Setup
 
 ``` bash
@@ -25,4 +39,3 @@ npm run lint
 
 ---
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[7c4e3e9](https://github.com/SimulatedGREG/electron-vue/tree/7c4e3e90a772bd4c27d2dd4790f61f09bae0fcef) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
