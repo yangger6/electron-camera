@@ -8,6 +8,7 @@ const { spawn } = require('child_process')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackHotMiddleware = require('webpack-hot-middleware')
+const uploadServer = require('./upload')
 
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
@@ -58,7 +59,7 @@ function startRenderer () {
     compiler.plugin('done', stats => {
       logStats('Renderer', stats)
     })
-
+    uploadServer(3000)
     const server = new WebpackDevServer(
       compiler,
       {
@@ -72,7 +73,6 @@ function startRenderer () {
         }
       }
     )
-
     server.listen(9080)
   })
 }

@@ -40,7 +40,7 @@
       }, false)
     },
     methods: {
-      snapshot () {
+      async snapshot () {
         let canvas = this.$refs.canvas
         let video = this.$refs.video
         let ctx = canvas.getContext('2d')
@@ -50,6 +50,14 @@
           let w = document.body.offsetWidth
           let y = video.offsetHeight - document.querySelector('header').offsetHeight - document.querySelector('footer').offsetHeight
           ctx.drawImage(video, dx, dy, w, y, 0, 0, w, y)
+          let formData = new FormData()
+          formData.append(this.$cfg.upload.fileKey, canvas.toDataURL('image/png'))
+          let config = {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+          await this.$http.post(this.$cfg.upload.path, formData, config)
           this.$store.commit('CHANGE_IMGDATAURL', canvas.toDataURL('image/webp'))
         }
       }

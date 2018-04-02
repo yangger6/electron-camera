@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import axios from 'axios'
-
+import config from './config/default'
 import App from './App'
 import router from './router'
 import store from './store'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
+Vue.cfg = Vue.prototype.$cfg = config
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
