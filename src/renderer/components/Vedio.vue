@@ -49,6 +49,8 @@
           let dy = document.querySelector('header').offsetHeight
           let w = document.body.offsetWidth
           let y = video.offsetHeight - document.querySelector('header').offsetHeight - document.querySelector('footer').offsetHeight
+          canvas.height = y // 图片实际高度
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
           ctx.drawImage(video, dx, dy, w, y, 0, 0, w, y)
           let formData = new FormData()
           formData.append(this.$cfg.upload.fileKey, canvas.toDataURL('image/png'))
@@ -58,7 +60,7 @@
             }
           }
           await this.$http.post(this.$cfg.upload.path, formData, config)
-          this.$store.commit('CHANGE_IMGDATAURL', canvas.toDataURL('image/webp'))
+          this.$store.commit('CHANGE_IMGDATAURL', canvas.toDataURL('image/png'))
         }
       }
     },

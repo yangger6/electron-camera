@@ -2,13 +2,8 @@
     <div id="home" class="home">
         <router-view></router-view>
         <header :class="selectMode.mode">
-            <ul>
-                <li class="disabled"><img src="~@/assets/flash.png" alt=""></li>
-                <li class="disabled"><img src="~@/assets/hdr.png" alt=""></li>
-                <li class="disabled"><img src="~@/assets/live.png" alt=""></li>
-                <li><img src="~@/assets/delaty.png" alt=""></li>
-                <li><img src="~@/assets/filter.png" alt=""></li>
-            </ul>
+                <top-bar>
+                </top-bar>
         </header>
         <v-camera></v-camera>
         <footer :class="selectMode.mode">
@@ -27,6 +22,7 @@
   import Beat from './Beat/Beat'
   import ChengMode from './ChangeMode/ChangeMode'
   import Preview from './Preview/Preview'
+  import TopBar from './TopBar/TopBar'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -42,6 +38,7 @@
     components: {
       'v-camera': Vedio,
       'change-mode': ChengMode,
+      'top-bar': TopBar,
       Mode,
       Beat,
       Preview

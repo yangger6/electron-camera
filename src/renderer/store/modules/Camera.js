@@ -1,5 +1,5 @@
 const state = {
-  state: 0, // 是否在拍照,
+  state: 0, // 拍照状态
   imgDataUrl: '' // 照片url
 }
 

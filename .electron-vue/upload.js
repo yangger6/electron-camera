@@ -25,7 +25,8 @@ router.post('/uploads', async (ctx, next) => {
   try {
     let base64Data = await formParse(ctx.req)
     let imgData = base64Data[fileKey].replace(/^data:image\/\w+;base64,/, '')
-    await fs.writeFile(`../uploads/${String(Date.now())}.png`, imgData, err => {
+    let dataBuffer = new Buffer(imgData, 'base64');
+    await fs.writeFile(`./uploads/${String(Date.now())}.png`, dataBuffer, err => {
       if (err) {
         console.log(err)
       }

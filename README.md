@@ -1,5 +1,6 @@
 # electron-camera
  A Desktop program similar to IOS Camera. Build [electron-vue](https://github.com/SimulatedGREG/electron-vue)
+ [![Build Status](https://img.shields.io/badge/README-切换语言-yellow.svg)](README_zh.md)
 > 0.0.1
 
 #### Features
@@ -9,7 +10,6 @@
     [] live photo
     [] HDR
     [] flashlight
-    [] continuous shooting
     [] pano
     [] burst
     [] time-lapse
@@ -30,7 +30,6 @@ npm run build
 
 # run unit & end-to-end tests
 npm test
-
 
 # lint all JS/Vue component files in `src/`
 npm run lint
