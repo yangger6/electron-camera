@@ -1,6 +1,8 @@
 <template>
   <main ref="main">
-    <video ref="video" id="video">Video stream not available.</video>
+    <figure style="width: inherit;height: inherit">
+      <video ref="video" id="video">Video stream not available.</video>
+    </figure>
     <canvas ref="canvas" id="canvas">canvas</canvas>
   </main>
 </template>

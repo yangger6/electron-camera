@@ -1,19 +1,19 @@
 <template>
     <ul class="topbar">
-        <flash-btn></flash-btn>
-        <hdr></hdr>
-        <live></live>
-        <delaty></delaty>
-        <filters></filters>
+        <flash-btn v-show="isUse('flash')" ></flash-btn>
+        <hdr v-show="isUse('hdr')" ></hdr>
+        <live v-show="isUse('live')" ></live>
+        <delaty v-show="isUse('delaty')"  ></delaty>
+        <filters v-show="isUse('filter')" type="top-bar"></filters>
     </ul>
 </template>
-
 <script>
   import FlashButton from './utils/FlashButton'
   import HDR from './utils/HDR'
   import Live from './utils/Live'
   import Delaty from './utils/Delaty'
   import Filter from './utils/Filters'
+  import { mapGetters } from 'vuex'
   export default {
     name: 'top-bar',
     components: {
@@ -22,6 +22,22 @@
       'live': Live,
       'delaty': Delaty,
       'filters': Filter
+    },
+    data () {
+      return {
+        selectIndex: 0
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'usingUtils'
+      ]),
+      isUse () {
+        let vm = this
+        return unitName => {
+          return vm.usingUtils.indexOf(unitName) > -1
+        }
+      }
     }
   }
 </script>
@@ -29,11 +45,11 @@
 <style lang="scss">
     ul.topbar{
         width: inherit;
+        height: 44px;
         padding: 0 20px;
         box-sizing: border-box;
         display: flex;
         justify-content: space-between;
-        height: inherit;
         li{
             display: flex;
             width: 44px;
@@ -42,7 +58,7 @@
             align-items: center;
             &.disabled:before{
                 content: '';
-                width: inherit;
+                width: 44px;
                 height: 2px;
                 border: 2px solid #000;
                 z-index: 1;

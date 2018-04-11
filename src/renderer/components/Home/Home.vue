@@ -6,8 +6,10 @@
                 </top-bar>
         </header>
         <v-camera></v-camera>
+
         <footer :class="selectMode.mode">
             <mode></mode>
+            <filters type="filters"></filters>
             <div class="bottom-bar">
                 <preview></preview>
                 <beat></beat>
@@ -23,6 +25,7 @@
   import ChengMode from './ChangeMode/ChangeMode'
   import Preview from './Preview/Preview'
   import TopBar from './TopBar/TopBar'
+  import Filter from './TopBar/utils/Filters'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -39,6 +42,7 @@
       'v-camera': Vedio,
       'change-mode': ChengMode,
       'top-bar': TopBar,
+      'filters': Filter,
       Mode,
       Beat,
       Preview
