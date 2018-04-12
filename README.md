@@ -15,7 +15,7 @@
     [] time-lapse
     [] slo-mo
     [] video
-    [] filter
+    [*] filter
 #### Build Setup
 
 ``` bash

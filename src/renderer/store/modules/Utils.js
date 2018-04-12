@@ -23,31 +23,39 @@ const state = [
   {
     name: 'filter',
     state: 0,
-    filters: ['', 'grayscale', 'sepia', 'saturate', 'invert', 'opacity', 'brightness', 'contrast', 'blur', 'tint', 'multiple-filters', 'inkwell'],
+    filters: ['origin', 'grayscale', 'sepia', 'saturate', 'opacity', 'brightness', 'contrast', 'blur', 'tint', 'multiple', 'inkwell'],
     selectIndex: 0,
     dependencies: ['photo', 'square']
   }
 ]
 const mutations = {
+  UPDATE_UTILS (state, payload) {
+    Object.assign(state, state.map(unit => unit.name === payload.name ? payload : unit))
+  },
   CHANGE_UTILS_STATE (state, payload) {
-    Object.assign(state, state.map(unit => unit.id === payload.id ? payload : unit))
+    let newState = 0
+    if (payload.state) {
+      newState = payload.state
+    } else {
+      newState = state.find(({ name }) => name === payload.name).state === 0 ? 1 : 0
+    }
+    state.find(({ name }) => name === payload.name).state = newState
+  },
+  CHANGE_UTILS_FILTERS_SELECTINDEX (state, index) {
+    state.find(({ name }) => name === 'filter').selectIndex = index
   }
 }
 const actions = {
-  changeUnitsState ({ commit }, payload) {
-    commit('CHANGE_UTILS_STATE', payload)
+  updateUtils ({ commit }, payload) {
+    commit('UPDATE_UTILS', payload)
   }
 }
 const getters = {
   usingUtils (state, getters) {
     return state.filter(unit => unit.dependencies.indexOf(getters.selectMode.mode) > -1).map(({ name }) => name)
   },
-  filterList (state) {
-    return state.find(({ name }) => name === 'filter').filters
-  },
-  selectFilter (state) {
-    let filter = state.find(({ name }) => name === 'filter')
-    return filter.filters[filter.selectIndex]
+  getUtilsByName (state) {
+    return findName => state.find(({ name }) => name === findName)
   }
 }
 export default {
