@@ -28,7 +28,6 @@
       let video = this.$refs.video
       let canvas = this.$refs.canvas
       let streaming = this.streaming
-      // video.height = document.body.offsetHeight
       navigator.mediaDevices.getUserMedia({ video: {width: document.body.offsetWidth, height: document.body.offsetHeight}, audio: false })
         .then(function (stream) {
           video.srcObject = stream

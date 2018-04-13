@@ -3,7 +3,7 @@
         <flash-btn v-show="isUse('flash')" ></flash-btn>
         <hdr v-show="isUse('hdr')" ></hdr>
         <live v-show="isUse('live')" ></live>
-        <delaty v-show="isUse('delaty')"  ></delaty>
+        <delaty @toLeft="utilsToLeft" v-show="isUse('delaty')"></delaty>
         <filters v-show="isUse('filter')" type="top-bar"></filters>
     </ul>
 </template>
@@ -25,7 +25,17 @@
     },
     data () {
       return {
-        selectIndex: 0
+        selectUtil: ''
+      }
+    },
+    methods: {
+      utilsToLeft (e) {
+        let utilName = e.$options.name
+        if (this.selectUtil === utilName) { // 再次点击还原
+          this.selectUtil = ''
+          return
+        }
+        this.selectUtil = utilName // 子元素点击，过滤掉其他工具=.=
       }
     },
     computed: {
@@ -35,6 +45,9 @@
       isUse () {
         let vm = this
         return unitName => {
+          if (vm.selectUtil) {
+            return vm.selectUtil === unitName
+          }
           return vm.usingUtils.indexOf(unitName) > -1
         }
       }
