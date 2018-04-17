@@ -6,7 +6,7 @@
                 </top-bar>
         </header>
         <v-camera></v-camera>
-
+        <tip></tip>
         <footer :class="selectMode.mode">
             <mode></mode>
             <filters type="filters"></filters>
@@ -22,6 +22,7 @@
   import Vedio from '../Vedio'
   import Mode from './Mode/Mode'
   import Beat from './Beat/Beat'
+  import Tip from './Tip/Tip'
   import ChengMode from './ChangeMode/ChangeMode'
   import Preview from './Preview/Preview'
   import TopBar from './TopBar/TopBar'
@@ -45,7 +46,8 @@
       'filters': Filter,
       Mode,
       Beat,
-      Preview
+      Preview,
+      Tip
     }
   }
 </script>

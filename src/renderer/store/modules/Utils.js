@@ -15,7 +15,7 @@ const state = [
     dependencies: ['photo']
   },
   {
-    name: 'delaty',
+    name: 'delay',
     state: 0,
     time: 0,
     dependencies: ['photo', 'square']
@@ -43,6 +43,14 @@ const mutations = {
   },
   CHANGE_UTILS_FILTERS_SELECTINDEX (state, index) {
     state.find(({ name }) => name === 'filter').selectIndex = index
+  },
+  CHANGE_UTILS_DELAY_TIME (state, time) {
+    state.find(({ name }) => name === 'delay').time = time
+    if (time > 0) {
+      state.find(({ name }) => name === 'delay').state = 1
+    } else {
+      state.find(({ name }) => name === 'delay').state = 0
+    }
   }
 }
 const actions = {

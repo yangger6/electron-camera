@@ -12,6 +12,7 @@
     name: 'screenByVedio',
     data () {
       return {
+        delayJSQ: setTimeout,
         streaming: false
       }
     },
@@ -19,6 +20,9 @@
       ...mapGetters([
         'cameraState'
       ]),
+      delayTime () {
+        return this.$store.getters.getUtilsByName('delay').time
+      },
       filter () {
         let storeFilter = this.$store.getters.getUtilsByName('filter')
         return storeFilter.filters[storeFilter.selectIndex]
@@ -75,7 +79,18 @@
     watch: {
       cameraState (val) {
         if (val === 1) { // 拍照
-          this.snapshot()
+          if (this.delayTime) { // 开启了计时器
+            this.delayJSQ = setTimeout(() => {
+              this.snapshot()
+              this.$store.commit('CHANGE_STATE', 0)
+            }, 1000 * this.delayTime)
+          } else {
+            this.snapshot()
+            this.$store.commit('CHANGE_STATE', 0)
+          }
+        } else if (val === 2) {
+          clearTimeout(this.delayJSQ)
+          this.$store.commit('CHANGE_STATE', 0)
         }
       }
     }

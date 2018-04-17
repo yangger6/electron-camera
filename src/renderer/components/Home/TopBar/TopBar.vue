@@ -3,7 +3,7 @@
         <flash-btn v-show="isUse('flash')" ></flash-btn>
         <hdr v-show="isUse('hdr')" ></hdr>
         <live v-show="isUse('live')" ></live>
-        <delaty @toLeft="utilsToLeft" v-show="isUse('delaty')"></delaty>
+        <delay @toLeft="utilsToLeft" v-show="isUse('delay')"></delay>
         <filters v-show="isUse('filter')" type="top-bar"></filters>
     </ul>
 </template>
@@ -11,7 +11,7 @@
   import FlashButton from './utils/FlashButton'
   import HDR from './utils/HDR'
   import Live from './utils/Live'
-  import Delaty from './utils/Delaty'
+  import Delay from './utils/Delay'
   import Filter from './utils/Filters'
   import { mapGetters } from 'vuex'
   export default {
@@ -20,7 +20,7 @@
       'flash-btn': FlashButton,
       'hdr': HDR,
       'live': Live,
-      'delaty': Delaty,
+      'delay': Delay,
       'filters': Filter
     },
     data () {
