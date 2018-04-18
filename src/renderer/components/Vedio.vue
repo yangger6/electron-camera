@@ -49,30 +49,49 @@
       }, false)
     },
     methods: {
-      async snapshot () {
+      getCanvasData () {
         let canvas = this.$refs.canvas
         let video = this.$refs.video
         let ctx = canvas.getContext('2d')
+        let dx = video.style.left.replace(/-|px/g, '')
+        let dy = document.querySelector('header').offsetHeight
+        let w = document.body.offsetWidth
+        let y = video.offsetHeight - document.querySelector('header').offsetHeight - document.querySelector('footer').offsetHeight
+        canvas.height = y // 图片实际高度
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        if (this.filter) {
+          ctx.filter = window.getComputedStyle(video.parentElement, null).getPropertyValue('filter')
+        }
+        ctx.drawImage(video, dx, dy, w, y, 0, 0, w, y)
+        return canvas.toDataURL('image/png')
+      },
+      async snapshot () {
         if (!this.streaming) {
-          let dx = video.style.left.replace(/-|px/g, '')
-          let dy = document.querySelector('header').offsetHeight
-          let w = document.body.offsetWidth
-          let y = video.offsetHeight - document.querySelector('header').offsetHeight - document.querySelector('footer').offsetHeight
-          canvas.height = y // 图片实际高度
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-          if (this.filter) {
-            ctx.filter = window.getComputedStyle(video.parentElement, null).getPropertyValue('filter')
-          }
-          ctx.drawImage(video, dx, dy, w, y, 0, 0, w, y)
           let formData = new FormData()
-          formData.append(this.$cfg.upload.fileKey, canvas.toDataURL('image/png'))
+          let imgData = this.getCanvasData()
+          formData.append(this.$cfg.upload.fileKey, imgData)
           let config = {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           }
           await this.$http.post(this.$cfg.upload.path, formData, config)
-          this.$store.commit('CHANGE_IMGDATAURL', canvas.toDataURL('image/png'))
+          this.$store.commit('CHANGE_IMGDATAURL', imgData)
+        }
+      },
+      async burst () {
+        if (!this.streaming) {
+          let formData = new FormData()
+          let imgData = this.getCanvasData()
+          formData.append(this.$cfg.upload.fileKey, imgData)
+          // let config = {
+          //   headers: {
+          //     'Content-Type': 'multipart/form-data'
+          //   }
+          // }
+          // await this.$http.post(this.$cfg.upload.path, formData, config)
+          this.$store.commit('ADD_BURSTNUM')
+          this.$store.commit('CHANGE_IMGDATAURL', imgData)
         }
       }
     },
@@ -90,6 +109,9 @@
           }
         } else if (val === 2) {
           clearTimeout(this.delayJSQ)
+          this.$store.commit('CHANGE_STATE', 0)
+        } else if (val === 3) {
+          this.burst()
           this.$store.commit('CHANGE_STATE', 0)
         }
       }

@@ -18,7 +18,7 @@
         modes: [
           {name: '关闭', value: 0},
           {name: '3秒', value: 3},
-          {name: '5秒', value: 5}
+          {name: '10秒', value: 10}
         ]
       }
     },

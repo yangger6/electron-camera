@@ -1,6 +1,10 @@
 const state = {
   state: 0, // 拍照状态
-  imgDataUrl: '' // 照片url
+  imgDataUrl: '', // 照片url,
+  burstData: {
+    key: '',
+    num: 0
+  }
 }
 
 const mutations = {
@@ -9,6 +13,18 @@ const mutations = {
   },
   CHANGE_IMGDATAURL (state, URL) {
     state.imgDataUrl = URL
+  },
+  ADD_BURSTNUM (state) {
+    if (state.burstData.num === 0) {
+      state.burstData.key = Date.now()
+    }
+    state.burstData.num++
+  },
+  CLEAR_BURSTDATA (state) {
+    state.burstData = {
+      key: '',
+      value: 0
+    }
   }
 }
 
@@ -20,7 +36,8 @@ const actions = {
 }
 const getters = {
   cameraState: state => state.state,
-  imgDataUrl: state => state.imgDataUrl
+  imgDataUrl: state => state.imgDataUrl,
+  burstData: state => state.burstData
 }
 export default {
   state,
