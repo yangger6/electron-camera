@@ -23,7 +23,7 @@ const mutations = {
   CLEAR_BURSTDATA (state) {
     state.burstData = {
       key: '',
-      value: 0
+      num: 0
     }
   }
 }

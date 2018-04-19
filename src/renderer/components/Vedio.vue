@@ -18,7 +18,8 @@
     },
     computed: {
       ...mapGetters([
-        'cameraState'
+        'cameraState',
+        'burstData'
       ]),
       delayTime () {
         return this.$store.getters.getUtilsByName('delay').time
@@ -83,13 +84,15 @@
         if (!this.streaming) {
           let formData = new FormData()
           let imgData = this.getCanvasData()
-          formData.append(this.$cfg.upload.fileKey, imgData)
-          // let config = {
-          //   headers: {
-          //     'Content-Type': 'multipart/form-data'
-          //   }
-          // }
-          // await this.$http.post(this.$cfg.upload.path, formData, config)
+          formData.append(this.$cfg.brust.fileKey, imgData)
+          formData.append('key', this.burstData.key)
+          formData.append('num', this.burstData.num)
+          let config = {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+          await this.$http.post(this.$cfg.brust.path, formData, config)
           this.$store.commit('ADD_BURSTNUM')
           this.$store.commit('CHANGE_IMGDATAURL', imgData)
         }

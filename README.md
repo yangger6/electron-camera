@@ -11,7 +11,7 @@
     [] HDR
     [] flashlight
     [] pano
-    [] burst
+    [*] burst
     [] time-lapse
     [] slo-mo
     [] video

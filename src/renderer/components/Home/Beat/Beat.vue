@@ -37,7 +37,6 @@
           this.claerJSQ()
           this.$store.commit('CLEAR_BURSTDATA') // 清除连拍记录
           this.$store.commit('CHANGE_STATE', 0) // 清除相机状态
-
           return
         }
         if ([...this.$refs.btn.classList].find(css => css === 'delay-square')) {
@@ -47,7 +46,6 @@
       },
       claerJSQ () {
         clearInterval(this.setint) // 清除长按计时器
-        console.log('clear')
       }
     }
   }
