@@ -10,7 +10,8 @@
     data () {
       return {
         hold: false,
-        setint: setInterval
+        setint: setInterval,
+        setimeout: setTimeout
       }
     },
     computed: {
@@ -28,13 +29,15 @@
     },
     methods: {
       holdOn () {
-        this.setint = setInterval(() => {
-          this.$store.commit('CHANGE_STATE', 3)
-        }, 100)
+        this.setimeout = setTimeout(() => {
+          this.setint = setInterval(() => {
+            this.$store.commit('CHANGE_STATE', 3)
+          }, 100)
+        }, 300)
       },
       beat (state) {
+        this.claerJSQ()
         if (this.burstData.num) { // 已经连拍了
-          this.claerJSQ()
           this.$store.commit('CLEAR_BURSTDATA') // 清除连拍记录
           this.$store.commit('CHANGE_STATE', 0) // 清除相机状态
           return
@@ -46,6 +49,7 @@
       },
       claerJSQ () {
         clearInterval(this.setint) // 清除长按计时器
+        clearTimeout(this.setimeout) // 清除长按计时器
       }
     }
   }

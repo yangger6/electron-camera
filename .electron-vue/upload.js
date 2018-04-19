@@ -23,17 +23,15 @@ function getFolder (folderName) {
   return new Promise((resolve , reject) => {
     fs.exists(`./uploads/${folderName}`, exists => {
       if (exists) {
-        console.log('文件夹存在')
         resolve(folderName)
       } else {
-        console.log('文件夹不存在')
         fs.mkdir(`./uploads/${folderName}`,function(err){
           if (err) {
             console.error(err)
             reject(err)
           }
           resolve(folderName)
-          console.log('创建目录成功')
+          console.log(`创建目录 -> ${folderName}`)
         });
       }
     })

@@ -93,7 +93,6 @@
             }
           }
           await this.$http.post(this.$cfg.brust.path, formData, config)
-          this.$store.commit('ADD_BURSTNUM')
           this.$store.commit('CHANGE_IMGDATAURL', imgData)
         }
       }
@@ -114,6 +113,7 @@
           clearTimeout(this.delayJSQ)
           this.$store.commit('CHANGE_STATE', 0)
         } else if (val === 3) {
+          this.$store.commit('ADD_BURSTNUM')
           this.burst()
           this.$store.commit('CHANGE_STATE', 0)
         }
